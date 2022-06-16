@@ -1,0 +1,88 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20vh auto;
+    min-height: 60vh;
+    width: 60vw;
+    max-width: 100%;
+}
+
+.loginSmall {
+    padding: .5rem;
+}
+
+.loginContainer {
+    background-color: var(--bg-color);
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+.loginHeader {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--text-color);
+
+}
+
+.loginSubHeader {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+
+.loginDataForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.loginDataForEmail {
+    padding: .3rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    outline: none;
+    height: 1.5rem;
+    width: 100%;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.loginDataForPassword {
+    padding: .3rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    outline: none;
+    height: 1.5rem;
+    width: 100%;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    position: relative;
+}
+
+.loginShowPass {
+    position: fixed;
+    top: 51%;
+    left: 63%;
+    padding: 2px;
+    border-radius: 2px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.loginDataFormBtn {
+    padding: .3rem;
+    margin: 1rem auto;
+    border-radius: 4px;
+    border: 2px solid var(--border-color);
+    outline: none;
+    width: 50%;
+    height: 2.5rem;
+    background-color: rgba(31, 167, 218, 0.67);
+}
+
+
+
