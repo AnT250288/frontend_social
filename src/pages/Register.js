@@ -9,26 +9,26 @@ const Register = () => {
     const dispatch = useDispatch()
 
     const initialState = {
-        fullName: "", userName: "", email: "", password: "", cf_password: "", gender: "male"
+        fullName: "", userName: "", email: "", password: "", cf_password: "", sex: "male"
     }
     const [userData, setUserData] = useState(initialState)
     const [passShow, setPassShow] = useState(false)
     const [passCFShow, setCFPassShow] = useState(false)
-    const {fullName, userName, email, password, cf_password, gender} = userData
+    const {fullName, userName, email, password, cf_password} = userData
 
-    /* useEffect(() => {
-         if (auth.token) {
-             navigate("/")
-         }
-     }, [auth.token, navigate])*/
+    useEffect(() => {
+        if (auth.token) {
+            navigate("/")
+        }
+    }, [auth.token, navigate])
 
     const changeInputHandle = (e) => {
         const {name, value} = e.target
         setUserData({...userData, [name]: value})
     }
 
-    const submitHandle = (e) => {
-        e.preventDefault()
+    const submitHandle = (event) => {
+        event.preventDefault()
         dispatch(register(userData))
     }
 
@@ -122,15 +122,15 @@ const Register = () => {
 
                 <div className={"row justify-content-between mx-0 mb-1"}>
                     <label htmlFor={"male"}>
-                        Male: <input type={"radio"} id={"male"} name={"gender"}
+                        Male: <input type={"radio"} id={"male"} name={"sex"}
                                      value={"male"} defaultChecked onChange={changeInputHandle}/>
                     </label>
                     <label htmlFor={"female"}>
-                        Female: <input type={"radio"} id={"female"} name={"gender"}
+                        Female: <input type={"radio"} id={"female"} name={"sex"}
                                        value={"female"} onChange={changeInputHandle}/>
                     </label>
                     <label htmlFor={"other"}>
-                        Other: <input type={"radio"} id={"other"} name={"gender"}
+                        Other: <input type={"radio"} id={"other"} name={"sex"}
                                       value={"other"} onChange={changeInputHandle}/>
                     </label>
                 </div>
@@ -146,6 +146,7 @@ const Register = () => {
             </form>
         </div>
     )
+
 
 }
 

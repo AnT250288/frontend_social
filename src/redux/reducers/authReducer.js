@@ -7,7 +7,6 @@ const authReducer = (state= initialState, action) => {
         case TYPES.AUTH:
             return action.payload
 
-
         default: return state
     }
 
