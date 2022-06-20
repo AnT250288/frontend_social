@@ -48,7 +48,7 @@ function App() {
                             <Explore/>
                         </PrivateRouter>
                     }/>
-                    <Route exact path={"/profile"} element={
+                    <Route exact path={"/profile/:id"} element={
                         <PrivateRouter>
                             <Profile/>
                         </PrivateRouter>

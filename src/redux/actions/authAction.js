@@ -64,27 +64,28 @@ export const refreshToken = () => async (dispatch) => {
 }
 
 export const register = (data) => async (dispatch) => {
-    /*const check = validation(data)
-    if (check.errLength > 0) {
-        dispatch({type: ALERT_TYPES.ALERT, payload: check.errMessage})
-    }*/
     try {
-        dispatch({type: ALERT_TYPES.ALERT, payload: {loading: true}})
-        const res = await postDataApi('register', data)
+        const check = validation(data)
+        if (check.errLength > 0) {
+            dispatch({type: ALERT_TYPES.ALERT, payload: check.errMessage})
+        }
+        console.log(data)
+        dispatch({type: "ALERT", payload: {loading: true}})
+        const res = await postDataApi("register", data)
         console.log(res)
         dispatch({
-            type: TYPES.AUTH,
+            type: "AUTH",
             payload: {
                 token: res.data.access_token,
                 user: res.data.user
             }
         })
-        localStorage.setItem("login", true)
-
+        localStorage.setItem('login', true)
         dispatch({
-            type: ALERT_TYPES.ALERT,
+            type: "ALERT",
             payload: {success: res.data.msg}
         })
+
     } catch (error) {
         console.log(error)
         dispatch({
@@ -97,7 +98,6 @@ export const register = (data) => async (dispatch) => {
 }
 
 export const logout = () => async (dispatch) => {
-
     try {
         localStorage.removeItem('login')
         await postDataApi('logout')

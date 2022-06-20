@@ -9,23 +9,24 @@ const Register = () => {
     const dispatch = useDispatch()
 
     const initialState = {
-        fullName: "", userName: "", email: "", password: "", cf_password: "", sex: "male"
+        fullName: "", username: "", email: "", password: "", cf_password: "", gender: "male"
     }
     const [userData, setUserData] = useState(initialState)
     const [passShow, setPassShow] = useState(false)
     const [passCFShow, setCFPassShow] = useState(false)
-    const {fullName, userName, email, password, cf_password} = userData
+    const {fullName, username, email, password, cf_password} = userData
+
+
+    const changeInputHandle = (e) => {
+        const {name, value} = e.target
+        setUserData({...userData, [name]: value})
+    }
 
     useEffect(() => {
         if (auth.token) {
             navigate("/")
         }
     }, [auth.token, navigate])
-
-    const changeInputHandle = (e) => {
-        const {name, value} = e.target
-        setUserData({...userData, [name]: value})
-    }
 
     const submitHandle = (event) => {
         event.preventDefault()
@@ -53,17 +54,17 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="userName">User Name</label>
-                    <input type="userName"
+                    <label htmlFor="username">User Name</label>
+                    <input type="username"
                            className="form-control"
-                           id="userName"
-                           name={"userName"}
+                           id="username"
+                           name={"username"}
                            onChange={changeInputHandle}
-                           value={userName.toLowerCase().replace(/ /g, '')}
-                           style={{background: `${alert.userName ? "#fd2d6a14" : ""}`}}/>
+                           value={username.toLowerCase().replace(/ /g, '')}
+                           style={{background: `${alert.username ? "#fd2d6a14" : ""}`}}/>
                     <small
                         className="form-text text-danger">
-                        {alert.userName ? alert.userName : ""}
+                        {alert.username ? alert.username : ""}
                     </small>
                 </div>
 
@@ -122,15 +123,15 @@ const Register = () => {
 
                 <div className={"row justify-content-between mx-0 mb-1"}>
                     <label htmlFor={"male"}>
-                        Male: <input type={"radio"} id={"male"} name={"sex"}
+                        Male: <input type={"radio"} id={"male"} name={"gender"}
                                      value={"male"} defaultChecked onChange={changeInputHandle}/>
                     </label>
                     <label htmlFor={"female"}>
-                        Female: <input type={"radio"} id={"female"} name={"sex"}
+                        Female: <input type={"radio"} id={"female"} name={"gender"}
                                        value={"female"} onChange={changeInputHandle}/>
                     </label>
                     <label htmlFor={"other"}>
-                        Other: <input type={"radio"} id={"other"} name={"sex"}
+                        Other: <input type={"radio"} id={"other"} name={"gender"}
                                       value={"other"} onChange={changeInputHandle}/>
                     </label>
                 </div>
