@@ -4,10 +4,12 @@ import {Provider} from "react-redux";
 import authReducer from "./reducers/authReducer"
 import thunk from "redux-thunk";
 import alertReducer from "./reducers/alertReducer";
+import profileReducer from "./reducers/profileReducer";
 
 export const rootReducer = combineReducers({
     auth: authReducer,
     alert: alertReducer,
+    profile: profileReducer,
 })
 
 export const store = createStore(

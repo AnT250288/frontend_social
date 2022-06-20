@@ -1,7 +1,11 @@
+import Posts from "../component/Posts";
+import Info from "../component/Info";
+
 const Profile = () => {
     return (
-        <div>
-            <h2>Profile</h2>
+        <div className={"profile"}>
+            <Info/>
+            <Posts/>
         </div>
     )
 }
