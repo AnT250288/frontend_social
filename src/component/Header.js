@@ -10,14 +10,31 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../redux/actions/authAction";
 import {Link, useLocation} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getDataApi} from "../utils/fetchApi";
+import {ALERT_TYPES} from "../redux/actions/alertAction";
+import UserCard from "./UserCard";
 
 
 const Header = () => {
     const {auth} = useSelector(state => state)
     const dispatch = useDispatch()
     const [search, setSearch] = useState('')
+    const [users, setUsers] = useState([])
     const {pathname} = useLocation()
+
+    useEffect(() => {
+        if (search && auth.token) {
+            getDataApi(`search?username=${search}`, auth.token)
+                .then(res => setUsers(res.data.users))
+                .catch(err => {
+                    dispatch({
+                        type: ALERT_TYPES.ALERT,
+                        payload: {error: err.response.data.msg}
+                    })
+                })
+        }
+    }, [search, auth.token, dispatch])
 
     const isActive = (pn) => {
         if (pn === pathname) {
@@ -36,6 +53,13 @@ const Header = () => {
                        onChange={(e) => setSearch(e.target.value)}/>
                 <SearchIcon/>
             </form>
+            {
+                users.length > 0 && users.map(user => (
+                    <Link to={`profile/${user._id}`} key={user._id}>
+                        <UserCard/>
+                    </Link>
+                ))
+            }
 
 
             <div className={"headerLeft"}>
