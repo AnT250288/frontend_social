@@ -1,6 +1,5 @@
 .profileInfo {
     height: 300px;
-    background: blue;
     width: 1000px;
     max-width: 100%;
     margin: 1rem auto;
@@ -65,8 +64,59 @@
 }
 
 .profileInfo-bottom {
+    margin-top: 2.4rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+    padding: 0 1rem;
+}
+
+.profileInfo-bottomLeft {
+    flex: 0.33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileInfo-stat {
+    padding: 5px;
+}
+
+.profileInfo-statNumber {
+    font-size: large;
+    text-align: center;
+    font-weight: 600;
+    color: #000000;
+}
+
+.profileInfo-statDesc {
+    font-size: 14px;
+    text-align: center;
+    font-weight: 300;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.profileInfo-bottomCenter {
+    flex: 0.33;
+}
+
+.profileInfo-fullName {
+    text-align: center;
+    color: #000000;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.profileInfo-username {
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+    font-size: small;
+}
+
+.profileInfo-bottomRight {
+    flex: 0.33;
 }
 
