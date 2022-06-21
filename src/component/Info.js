@@ -1,26 +1,11 @@
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
 import "../styles/info.css"
-import {getUserProfile} from "../redux/actions/profileAction";
-
-const Info = () => {
-    const {id} = useParams()
-    const dispatch = useDispatch()
-    const {auth, profile} = useSelector(state => state)
-    const [userData, setUserData] = useState([])
+import {useState} from "react";
+import EditProfile from "./EditProfile";
 
 
-    useEffect(() => {
-        if (auth && auth.user && id === auth.user._id) {
-            setUserData([auth.user])
-        } else {
-            dispatch(getUserProfile({users: profile.users, id, auth}))
-            const newData = profile.users.filter(user => user._id === id)
-            setUserData(newData)
-        }
-    }, [id, auth.user, auth, dispatch, profile.users])
+const Info = ({userData, profile, auth, id}) => {
 
+    const [onEdit, setOnEdit] = useState(false)
 
     return (
         <div className={"profileInfo"}>
@@ -31,7 +16,8 @@ const Info = () => {
                     </div>
                     <div className={"profileInfo-center"}>
                         <img className={"profileInfo-centerAvatar"} src={user.avatar} alt={"avatar"}/>
-                        <button className={"profileInfo-centerButton"}>Add Friend</button>
+                        <button className={"profileInfo-centerButton"} onClick={() => setOnEdit(true)}>EDIT PROFILE
+                        </button>
                     </div>
                     <div className={"profileInfo-bottom"}>
                         <div className={"profileInfo-bottomLeft"}>
@@ -55,8 +41,10 @@ const Info = () => {
                                 <h6 className={"profileInfo-statDesc"}>POSTS</h6>
                             </div>
                         </div>
-
                     </div>
+                    {
+                        onEdit && <EditProfile user={user} setOnEdit={setOnEdit}/>
+                    }
                 </div>
             )))}
         </div>

@@ -1,0 +1,115 @@
+.editProfile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(18, 161, 20, 0.51);
+}
+
+.editProfileContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fced84;
+    padding: 4rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    color: cadetblue;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.editProfileHead {
+    display: flex;
+    justify-content: space-between;
+    min-width: 50%;
+    padding: 5px 0;
+}
+
+.editProfileHeadTitle {
+    font-size: 1.5rem;
+    text-align: center;
+
+}
+
+.editProfileHeadClose {
+    background-color: var(--bg-color);
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    font-weight: 900;
+    color: red;
+}
+
+.editProfileAvatar {
+    width: 150px;
+    height: 150px;
+    padding: 1rem 0;
+    position: relative;
+}
+
+i {
+    position: absolute;
+    bottom: 40%;
+    right: 40%;
+    font-size: x-large;
+    color: cadetblue;
+    background-color: rgba(80, 77, 77, 0.53);
+    width: 25%;
+    height: 20%;
+    vertical-align: center;
+    border-radius: 10px;
+    padding: .5rem;
+    opacity: 0;
+}
+
+.editProfileAvatar:hover i {
+    opacity: 1;
+}
+
+.editProfileAvatar img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.editProfileUserData {
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.editProfileUserDataFullName, .editProfileUserDataAddress, .editProfileUserDataPhone, .editProfileUserDataStory {
+    padding: .5rem;
+    display: flex;
+    border-radius: 10px;
+    background-color: cadetblue;
+    margin: .5rem;
+    color: white;
+}
+
+p {
+    font-size: small;
+    color: white;
+}
+
+input {
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
