@@ -38,7 +38,7 @@ const validation = ({fullName, userName, email, password, cf_password, gender}) 
 const validateEmail = (email) => {
     return String(email)
         .toLowerCase()
-        .match(/^([a-z\d\.-]+)@([a-z\d-]+).([a-z]{2,12})(\.[a-z]{2,12})?$/)
+        .match(/^([a-z\d-]+)@([a-z\d-]+).([a-z]{2,12})(\.[a-z]{2,12})?$/)
 }
 
 export default validation

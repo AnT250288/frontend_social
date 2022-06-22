@@ -105,6 +105,18 @@ p {
     color: white;
 }
 
+.editProfileUserDataButton {
+    padding: .5rem;
+    margin: .5rem;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    background-color: cadetblue;
+    outline: none;
+    border: none;
+    color: white;
+}
+
 input {
     background-color: transparent;
     outline: none;

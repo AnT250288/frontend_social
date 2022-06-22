@@ -1,21 +1,44 @@
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import "../styles/editProfile.css"
+import {checkImageFile} from "../utils/imageUpload";
+import {updateProfile} from "../redux/actions/profileAction";
 
 const EditProfile = ({user, setOnEdit}) => {
     const {auth} = useSelector(state => state)
+    const dispatch = useDispatch()
     const initialState = {fullName: '', story: '', phone: '', address: ''}
     const [editData, setEditData] = useState(initialState)
     const {fullName, story, phone, address} = editData
     const [avatar, setAvatar] = useState('')
 
-    const changeAvatar = () => {
-
+    const changeAvatar = (e) => {
+        const file = e.target.files[0]
+        const err = checkImageFile(file)
+        if (err) {
+            return dispatch({type: "ALERT", payload: {error: err}})
+        }
+        setAvatar(file)
     }
+
+    useEffect(() => {
+        setEditData(user)
+    }, [user])
 
     const changeInputHandle = (e) => {
         const {name, value} = e.target
         setEditData({...editData, [name]: value})
+    }
+
+
+    const selectUpload = () => {
+        const fileUploadInput = document.getElementById("file-upload")
+        fileUploadInput.click();
+    }
+
+    const submitHandle = (e) => {
+        e.preventDefault()
+        dispatch(updateProfile({editData, avatar}))
     }
 
 
@@ -30,7 +53,7 @@ const EditProfile = ({user, setOnEdit}) => {
                 </div>
                 <div className={"editProfileAvatar"}>
                     <img src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar} alt={"avatar"}/>
-                    <i className={"fas fa-camera"}><p>Change avatar</p></i>
+                    <i className={"fas fa-camera"} onClick={selectUpload}><p>Change avatar</p></i>
                     <span>
                     <input style={{display: 'none'}} type={"file"} id={"file-upload"} accept={"image/*"}
                            onChange={changeAvatar}/>
@@ -59,6 +82,7 @@ const EditProfile = ({user, setOnEdit}) => {
                                name={"story"} placeholder={"Type your Bio"}/>
                         <p>{story.length}/200</p>
                     </div>
+                    <button onClick={submitHandle} className={"editProfileUserDataButton"}>Submit</button>
                 </div>
             </div>
         </div>
