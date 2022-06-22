@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../redux/actions/authAction";
 import {Link, useLocation} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getDataApi} from "../utils/fetchApi";
 import "../styles/header.css";
 import IconButton from "@material-ui/core/IconButton";
@@ -92,7 +92,7 @@ const Header = () => {
 
 
             <div className={"header-left"}>
-                <Link to={`profile/${auth.user._id}`}>
+                <Link to={`/profile/${auth.user._id}`}>
                     <div className={"header-leftAvatar"}>
                         <Avatar src={auth.user.avatar}/>
                         <h4 style={{color: "white"}}>{auth.user.fullName}</h4>

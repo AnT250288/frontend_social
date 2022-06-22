@@ -4,8 +4,8 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 300px 20px #fced84;
-    min-width: 200px;
-    height: 350px;
+    max-width: 250px;
+    min-height: 300px;
 }
 
 .profileAboutContainer {
@@ -48,4 +48,5 @@
     align-self: flex-end;
     font-size: small;
     font-weight: 300;
+    color: black;
 }

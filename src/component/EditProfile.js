@@ -12,6 +12,10 @@ const EditProfile = ({user, setOnEdit}) => {
     const {fullName, story, phone, address} = editData
     const [avatar, setAvatar] = useState('')
 
+    useEffect(() => {
+        setEditData(auth.user)
+    }, [auth.user])
+
     const changeAvatar = (e) => {
         const file = e.target.files[0]
         const err = checkImageFile(file)
@@ -21,9 +25,6 @@ const EditProfile = ({user, setOnEdit}) => {
         setAvatar(file)
     }
 
-    useEffect(() => {
-        setEditData(user)
-    }, [user])
 
     const changeInputHandle = (e) => {
         const {name, value} = e.target
@@ -38,7 +39,7 @@ const EditProfile = ({user, setOnEdit}) => {
 
     const submitHandle = (e) => {
         e.preventDefault()
-        dispatch(updateProfile({editData, avatar}))
+        dispatch(updateProfile({editData, avatar, auth}))
     }
 
 

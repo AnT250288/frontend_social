@@ -22,7 +22,7 @@ const Info = ({userData, profile, auth, id}) => {
                                 <button className={"profileInfoCenterButton"}
                                         onClick={() => setOnEdit(true)}>EDIT PROFILE
                                 </button>
-                                : <GlobalFriendsBtn classBtn="profileInfoCenterButton"/>
+                                : <GlobalFriendsBtn classBtn="profileInfoCenterButton" user={user}/>
                         }
                     </div>
                     <div className={"profileInfoBottom"}>
