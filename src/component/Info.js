@@ -49,7 +49,7 @@ const Info = ({userData, profile, auth, id}) => {
                         </div>
                     </div>
                     {
-                        onEdit && <EditProfile user={user} setOnEdit={setOnEdit}/>
+                        onEdit && <EditProfile setOnEdit={setOnEdit}/>
                     }
                 </div>
             )))}

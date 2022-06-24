@@ -3,9 +3,11 @@ export const ALERT_TYPES = {
 }
 
 export const EditData = (data, id, post) => {
-    return data.map(item => (item._id === id) ? post : item)
+    const newData = data.map(item => (item._id === id) ? post : item)
+    return newData
 }
 
 export const DeleteData = (data, id) => {
-    return data.filter(item => item._id !== id)
+    const newData = data.filter(item => item._id !== id)
+    return newData
 }

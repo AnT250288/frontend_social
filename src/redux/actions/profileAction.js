@@ -46,7 +46,7 @@ export const updateProfile = ({editData, avatar, auth}) => async (dispatch) => {
         dispatch({type: ALERT_TYPES.ALERT, payload: {loading: true}})
         if (avatar) media = await imageUpload([avatar])
 
-        const res = await patchDataApi('user', {
+        const res = await patchDataApi(`user/${auth.user._id}`, {
             ...editData,
             avatar: avatar ? media[0].secure_url : auth.user.avatar
         }, auth.token)
@@ -62,7 +62,6 @@ export const updateProfile = ({editData, avatar, auth}) => async (dispatch) => {
             }
         })
         dispatch({type: ALERT_TYPES.ALERT, payload: {success: res.data.msg}})
-
     } catch (err) {
         dispatch({
             type: ALERT_TYPES.ALERT,
@@ -74,8 +73,7 @@ export const updateProfile = ({editData, avatar, auth}) => async (dispatch) => {
 }
 
 export const addFriend = ({users, user, auth}) => async (dispatch) => {
-    const newUser = {...user, friends: [...user.friends, auth.user]}
-    console.log(newUser)
+    let newUser = {...user, friends: [...user.friends, auth.user]}
     dispatch({
         type: PROFILE_TYPES.FRIEND,
         payload: newUser
@@ -85,13 +83,32 @@ export const addFriend = ({users, user, auth}) => async (dispatch) => {
         type: TYPES.AUTH,
         payload: {
             ...auth,
-            user: {...auth.user, following: [...auth.user.following, newUser]}
+            user: {
+                ...auth.user,
+                following: [...auth.user.following, newUser]
+            }
         }
     })
+
+    try {
+        await patchDataApi(`user/${user._id}/friend`, null, auth.token)
+        console.log(user._id)
+        console.log(auth.user._id)
+    } catch (err) {
+        dispatch({
+            type: ALERT_TYPES.ALERT,
+            payload: {
+                error: err.response.data.msg
+            }
+        })
+    }
 }
 
 export const unFriends = ({users, user, auth}) => async (dispatch) => {
-    const newUser = {...user, friends: DeleteData(user.friends, auth.user._id)}
+    let newUser = {
+        ...user,
+        friends: DeleteData(user.friends, auth.user._id)
+    }
     dispatch({
         type: PROFILE_TYPES.UNFRIEND,
         payload: newUser
@@ -107,4 +124,15 @@ export const unFriends = ({users, user, auth}) => async (dispatch) => {
             }
         }
     })
+
+    try {
+        await patchDataApi(`user/${user._id}/unfollow`, null, auth.token)
+    } catch (err) {
+        dispatch({
+            type: ALERT_TYPES.ALERT,
+            payload: {
+                error: err.response.data.msg
+            }
+        })
+    }
 }

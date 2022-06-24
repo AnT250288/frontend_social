@@ -1,5 +1,5 @@
 import {PROFILE_TYPES} from "../actions/profileAction";
-import {EditData} from "../actions/alertAction";
+import {DeleteData, EditData} from "../actions/alertAction";
 
 const initialState = {
     loading: false,

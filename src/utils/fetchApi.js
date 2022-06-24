@@ -8,7 +8,7 @@ export const getDataApi = async (url, token) => {
 }
 
 export const postDataApi = async (url, data, token) => {
-    const res =  await axios.post(`/api/${url}`, data, {
+    const res = await axios.post(`/api/${url}`, data, {
         headers: {Authorization: token}
     })
     return res
@@ -21,9 +21,11 @@ export const putDataApi = async (url, data, token) => {
 }
 
 export const patchDataApi = async (url, data, token) => {
-    return await axios.patch(`/api/${url}`, data, {
+    const res = await axios.patch(`/api/${url}`, data, {
         headers: {Authorization: token}
     })
+    console.log(url)
+    return res
 }
 
 export const deleteDataApi = async (url, token) => {

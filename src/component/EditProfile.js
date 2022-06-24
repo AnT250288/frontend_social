@@ -4,7 +4,7 @@ import "../styles/editProfile.css"
 import {checkImageFile} from "../utils/imageUpload";
 import {updateProfile} from "../redux/actions/profileAction";
 
-const EditProfile = ({user, setOnEdit}) => {
+const EditProfile = ({setOnEdit}) => {
     const {auth} = useSelector(state => state)
     const dispatch = useDispatch()
     const initialState = {fullName: '', story: '', phone: '', address: ''}
@@ -25,12 +25,10 @@ const EditProfile = ({user, setOnEdit}) => {
         setAvatar(file)
     }
 
-
     const changeInputHandle = (e) => {
         const {name, value} = e.target
         setEditData({...editData, [name]: value})
     }
-
 
     const selectUpload = () => {
         const fileUploadInput = document.getElementById("file-upload")
@@ -56,9 +54,9 @@ const EditProfile = ({user, setOnEdit}) => {
                     <img src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar} alt={"avatar"}/>
                     <i className={"fas fa-camera"} onClick={selectUpload}><p>Change avatar</p></i>
                     <span>
-                    <input style={{display: 'none'}} type={"file"} id={"file-upload"} accept={"image/*"}
-                           onChange={changeAvatar}/>
-                </span>
+                        <input style={{display: 'none'}} type={"file"} id={"file-upload"} accept={"image/*"}
+                              onChange={changeAvatar}/>
+                    </span>
                 </div>
                 <div className={"editProfileUserData"}>
                     <label htmlFor={"fullName"}>Full Name</label>
