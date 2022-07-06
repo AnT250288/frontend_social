@@ -1,32 +1,69 @@
-import {Avatar} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import React from 'react'
+import Avatar from './Avatar'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const UserCard = ({user, closeHandle}) => {
-    const closeAllHandle = () => {
-        if (closeHandle) closeHandle()
+const UserCard = ({children, user, border, handleClose, setShowFollowers, setShowFollowing, msg}) => {
+
+    const { theme } = useSelector(state => state)
+
+    const handleCloseAll = () => {
+        if(handleClose) handleClose()
+        if(setShowFollowers) setShowFollowers(false)
+        if(setShowFollowing) setShowFollowing(false)
     }
 
+    const showMsg = (user) => {
+        return(
+            <>
+                <div style={{filter: theme ? 'invert(1)' : 'invert(0)'}}>
+                    {user.text}
+                </div>
+                {
+                    user.media.length > 0 && 
+                    <div>
+                        {user.media.length} <i className="fas fa-image" />
+                    </div>
+                }
+
+                {
+                    user.call &&
+                    <span className="material-icons">
+                        {
+                            user.call.times === 0
+                            ? user.call.video ? 'videocam_off' : 'phone_disabled'
+                            : user.call.video ? 'video_camera_front' : 'call'
+                        }
+                    </span>
+                }
+            </>
+        )
+    }
+
+
     return (
-        <div>
-            <div style={{
-                display: 'flex',
-                padding: '10px',
-                alignItems: 'center',
-                borderBottom: "1px solid rgba(152, 238, 135, 0.87)"
-            }}>
-                < Link to={`profile/${user._id}`
-                } onClick={closeAllHandle} key={user._id} style={{
-                    display: 'flex',
-                    padding: '10px',
-                    alignItems: 'center'
-                }}>
-                    <Avatar src={user.avatar}/>
-                    <div style={{marginLeft: '6px', color: 'white'}}>
-                        <span style={{display: 'block'}}>{user.fullName}</span>
-                        <small>{user.username}</small>
+        <div className={`d-flex p-2 align-items-center justify-content-between w-100 ${border}`}>
+            <div>
+                <Link to={`/profile/${user._id}`} onClick={handleCloseAll}
+                className="d-flex align-items-center">
+                    
+                    <Avatar src={user.avatar} size="big-avatar" />
+
+                    <div className="ml-1" style={{transform: 'translateY(-2px)'}}>
+                        <span className="d-block">{user.username}</span>
+                        
+                        <small style={{opacity: 0.7}}>
+                            {
+                                msg 
+                                ? showMsg(user)
+                                : user.fullname
+                            }
+                        </small>
                     </div>
                 </Link>
             </div>
+            
+            {children}
         </div>
     )
 }

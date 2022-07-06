@@ -1,22 +1,27 @@
-export const checkImageFile = (file) => {
+export const checkImage = (file) => {
     let err = ""
-    if (!file) {
-        return err = "File not found"
-    }
-    if (file.size > 1024 * 1024) {
-        return err = "FIle size should be less than 1mb"
-    }
-    if (file.type !== 'image/jpeg' && file.type !== "image/png") {
-        return err = "File format not supported"
-    }
+    if(!file) return err = "File does not exist."
+
+    if(file.size > 1024 * 1024) // 1mb
+    err = "The largest image size is 1mb."
+
+    if(file.type !== 'image/jpeg' && file.type !== 'image/png' )
+    err = "Image format is incorrect."
+    
+    return err;
 }
-const CLOUDINARY_URL = "cloudinary://673956851749774:ePF6Z2qnvfByN60rB7VzZUbx2AY@antonsocialnetwork"
+
 
 export const imageUpload = async (images) => {
-    let imgArr = []
-    for (const item of images) {
+    let imgArr = [];
+    for(const item of images){
         const formData = new FormData()
-        formData.append("file", item)
+
+        if(item.camera){
+            formData.append("file", item.camera)
+        }else{
+            formData.append("file", item)
+        }
 
         formData.append('upload_preset', "evodd6dg")
         formData.append('cloud_name', "antonsocialnetwork")
@@ -25,9 +30,9 @@ export const imageUpload = async (images) => {
             method: "POST",
             body: formData
         })
-
+        
         const data = await res.json()
-        imgArr.push({public_id: data.public_id, secure_url: data.secure_url})
+        imgArr.push({public_id: data.public_id, url: data.secure_url})
     }
-    return imgArr
+    return imgArr;
 }
