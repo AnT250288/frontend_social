@@ -1,22 +1,18 @@
-import {createStore, applyMiddleware, combineReducers} from "redux"
-import {composeWithDevTools} from "redux-devtools-extension"
-import {Provider} from "react-redux";
-import authReducer from "./reducers/authReducer"
-import thunk from "redux-thunk";
-import alertReducer from "./reducers/alertReducer";
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
-export const rootReducer = combineReducers({
-    auth: authReducer,
-    alert: alertReducer,
-})
+import rootReducer from './reducers'
 
-export const store = createStore(
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(thunk)))
-
+    composeWithDevTools(applyMiddleware(thunk))
+)
 
 const DataProvider = ({children}) => {
-    return (
+    return(
         <Provider store={store}>
             {children}
         </Provider>

@@ -1,27 +1,24 @@
-.authPage {
+.auth_page{
     width: 100%;
     min-height: 100vh;
     background: #fdfdfd;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-.authPage form {
+.auth_page form{
     background: #fff;
     max-width: 400px;
     width: 100%;
     border: 1px solid #ddd;
     padding: 50px 25px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
-.authPage form .pass {
+.auth_page form .pass{
     position: relative;
 }
 
-.authPage form .pass small{
+.auth_page form .pass small{
     position: absolute;
     top: 50%;
     right: 5px;

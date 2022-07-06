@@ -1,10 +1,10 @@
 import { GLOBALTYPES } from '../actions/globalTypes'
 
-const initialState = {}
+const initialState = false
 
-const alertReducer = (state = initialState, action) => {
+const modalReducer = (state = initialState, action) => {
     switch (action.type){
-        case GLOBALTYPES.ALERT:
+        case GLOBALTYPES.MODAL:
             return action.payload;
         default:
             return state;
@@ -12,4 +12,4 @@ const alertReducer = (state = initialState, action) => {
 }
 
 
-export default alertReducer
+export default modalReducer
